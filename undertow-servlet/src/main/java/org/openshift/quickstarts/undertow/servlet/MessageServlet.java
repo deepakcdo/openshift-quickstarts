@@ -20,6 +20,9 @@ package org.openshift.quickstarts.undertow.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -44,13 +47,19 @@ public class MessageServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+        String date = LocalDateTime.now().toString();
+        System.out.println("Got Get Request at " + date  + "  I am "  + InetAddress.getLocalHost().getCanonicalHostName());
         PrintWriter writer = resp.getWriter();
-        writer.write(message);
+        writer.write(message + " the time is date");
         writer.close();
     }
 
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        String date = LocalDateTime.now().toString();
+        System.out.println("Got Post Request at " + date );
+        PrintWriter writer = resp.getWriter();
+        writer.write(message + " the time is date." );
+        writer.close();
     }
 }
