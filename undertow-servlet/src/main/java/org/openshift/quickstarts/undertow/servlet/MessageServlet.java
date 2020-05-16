@@ -50,7 +50,7 @@ public class MessageServlet extends HttpServlet {
         String date = LocalDateTime.now().toString();
         System.out.println("Got Get Request at " + date  + "  I am "  + InetAddress.getLocalHost().getCanonicalHostName());
         PrintWriter writer = resp.getWriter();
-        writer.write(message + " the time is date");
+        writer.write(message + " the time is date" + date);
         writer.close();
     }
 
@@ -59,7 +59,7 @@ public class MessageServlet extends HttpServlet {
         String date = LocalDateTime.now().toString();
         System.out.println("Got Post Request at " + date );
         PrintWriter writer = resp.getWriter();
-        writer.write(message + " the time is date." );
+        writer.write(message + " the time is date."   +date);
         writer.close();
     }
 }
