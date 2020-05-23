@@ -54,11 +54,14 @@ public class ServletServer {
                     .setDeploymentName("test.war")
                     .addServlets(
                             servlet("MessageServlet", MessageServlet.class)
-                                    .addInitParam("message", "Hello World !!")
+                                    .addInitParam("message", "Root Link")
                                     .addMapping("/*"),
                             servlet("MyServlet", MessageServlet.class)
-                                    .addInitParam("message", "MyServlet")
-                                    .addMapping("/myservlet"));
+                                    .addInitParam("message", "My")
+                                    .addMapping("/my"),
+                            servlet("Stop", StopServlet.class)
+                                    .addInitParam("message", "stop")
+                                    .addMapping("/stop"));
 
             DeploymentManager manager = defaultContainer().addDeployment(servletBuilder);
             manager.deploy();
@@ -69,10 +72,10 @@ public class ServletServer {
                 String directory = System.getenv("HTTPS_KEYSTORE_DIR");
                 char[] password = System.getenv("HTTPS_PASSWORD").toCharArray();
                 File keystore = new File(directory, filename);
-            
+
                 sslContext = createSSLContext(loadKeyStore(keystore, password), password);
             }
-            
+
             HttpHandler servletHandler = manager.start();
             PathHandler path = Handlers.path(Handlers.redirect(MYAPP))
                     .addPrefixPath(MYAPP, servletHandler);
@@ -86,10 +89,10 @@ public class ServletServer {
             throw new RuntimeException(e);
         }
     }
-    
+
     private static KeyStore loadKeyStore(File file, char[] password) throws Exception {
         final InputStream stream = new FileInputStream(file);
-        try(InputStream is = stream) {
+        try (InputStream is = stream) {
             KeyStore loadedKeystore = KeyStore.getInstance("JKS");
             loadedKeystore.load(is, password);
             return loadedKeystore;

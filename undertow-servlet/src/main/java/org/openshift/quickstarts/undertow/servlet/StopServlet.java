@@ -18,23 +18,20 @@
 
 package org.openshift.quickstarts.undertow.servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.time.LocalDateTime;
 
 /**
  * @author Stuart Douglas
  */
-public class MessageServlet extends HttpServlet {
+public class StopServlet extends HttpServlet {
 
     public static final String MESSAGE = "message";
 
@@ -48,23 +45,11 @@ public class MessageServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        writer.write(getMessage(req));
-        writer.close();
+        System.exit(0);
     }
 
     @Override
     protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
-        writer.write(getMessage(req));
-        writer.close();
-    }
-
-    private String getMessage(final HttpServletRequest req) throws IOException {
-        String date = LocalDateTime.now().toString();
-        String hostName = InetAddress.getLocalHost().getCanonicalHostName();
-        String name = req.getParameter("name");
-        return  message + ",  Hello  From " + name  + " !!! Date is " + date + " from server " + hostName;
-
+        doGet(req, resp);
     }
 }
