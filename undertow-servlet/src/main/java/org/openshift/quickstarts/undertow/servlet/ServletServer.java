@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
+import java.time.LocalDateTime;
 
 /**
  * @author Stuart Douglas
@@ -47,7 +48,7 @@ public class ServletServer {
 
     public static void main(final String[] args) {
         try {
-
+            String startupTime = LocalDateTime.now().toString();
             DeploymentInfo servletBuilder = deployment()
                     .setClassLoader(ServletServer.class.getClassLoader())
                     .setContextPath(MYAPP)
@@ -55,12 +56,15 @@ public class ServletServer {
                     .addServlets(
                             servlet("MessageServlet", MessageServlet.class)
                                     .addInitParam("message", "Root Link")
+                                    .addInitParam("startUpTime", startupTime)
                                     .addMapping("/*"),
                             servlet("MyServlet", MessageServlet.class)
                                     .addInitParam("message", "My")
+                                    .addInitParam("startUpTime", startupTime)
                                     .addMapping("/my"),
                             servlet("Stop", StopServlet.class)
                                     .addInitParam("message", "stop")
+                                    .addInitParam("startUpTime", startupTime)
                                     .addMapping("/stop"));
 
             DeploymentManager manager = defaultContainer().addDeployment(servletBuilder);

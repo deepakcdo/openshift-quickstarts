@@ -39,11 +39,13 @@ public class MessageServlet extends HttpServlet {
     public static final String MESSAGE = "message";
 
     private String message;
+    private String startUpTime;
 
     @Override
     public void init(final ServletConfig config) throws ServletException {
         super.init(config);
         message = config.getInitParameter(MESSAGE);
+        startUpTime = config.getInitParameter("startUpTime");
     }
 
     @Override
@@ -64,7 +66,10 @@ public class MessageServlet extends HttpServlet {
         String date = LocalDateTime.now().toString();
         String hostName = InetAddress.getLocalHost().getCanonicalHostName();
         String name = req.getParameter("name");
-        return  message + ",  Hello  From " + name  + " !!! Date is " + date + " from server " + hostName;
+        String msg =  message + ",  Hello  From " + name  + " !!! Date is " + date + " from server " + hostName
+                + " I started serving at " + startUpTime;
+        System.out.println(msg);
+        return msg;
 
     }
 }
