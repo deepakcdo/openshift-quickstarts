@@ -49,6 +49,7 @@ public class ServletServer {
     public static void main(final String[] args) {
         try {
             String startupTime = LocalDateTime.now().toString();
+            System.out.println("!!!!!!!!!!!!!!Staring Server !!!!!!!!!!!!!!");
             DeploymentInfo servletBuilder = deployment()
                     .setClassLoader(ServletServer.class.getClassLoader())
                     .setContextPath(MYAPP)

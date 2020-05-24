@@ -43,13 +43,16 @@ public class BlockServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Going to Block for ever !!!!!");
-        while (true) {
+         int t  = 0;
+        while (t != -1) { // force always to be false. More complex to trick the compiler
+            t++;
             try {
                 Thread.sleep(Integer.MAX_VALUE);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        System.out.println("Was going to Block for ever . I should never come here !!!!!");
     }
 
     @Override
