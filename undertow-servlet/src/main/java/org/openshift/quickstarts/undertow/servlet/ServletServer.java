@@ -62,6 +62,10 @@ public class ServletServer {
                                     .addInitParam("message", "My")
                                     .addInitParam("startUpTime", startupTime)
                                     .addMapping("/my"),
+                            servlet("Block", BlockServlet.class)
+                                    .addInitParam("message", "Block")
+                                    .addInitParam("startUpTime", startupTime)
+                                    .addMapping("/block"),
                             servlet("Stop", StopServlet.class)
                                     .addInitParam("message", "stop")
                                     .addInitParam("startUpTime", startupTime)

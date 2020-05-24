@@ -24,14 +24,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.time.LocalDateTime;
 
 /**
  * @author Stuart Douglas
  */
-public class StopServlet extends HttpServlet {
+public class BlockServlet extends HttpServlet {
 
     public static final String MESSAGE = "message";
 
@@ -45,8 +42,14 @@ public class StopServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Going to shut down !!!!!");
-        System.exit(0);
+        System.out.println("Going to Block for ever !!!!!");
+        while (true) {
+            try {
+                Thread.sleep(Integer.MAX_VALUE);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
